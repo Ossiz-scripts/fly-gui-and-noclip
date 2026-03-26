@@ -9,7 +9,7 @@ FlyGuiMain.Name = "FlyGui_Final_StatusText"
 FlyGuiMain.ResetOnSpawn = false
 FlyGuiMain.Parent = player:WaitForChild("PlayerGui")
 
--- Status Label (GUI CLOSED - Visas i 3 sekunder)
+-- Status Label
 local ClosedLabel = Instance.new("TextLabel")
 ClosedLabel.Name = "ClosedStatus"
 ClosedLabel.Text = "GUI CLOSED"
@@ -59,12 +59,12 @@ local function createBtn(name, text, pos, size, color, parent)
 	return b
 end
 
--- UI Elements
+-- UI Elements (Uppdaterad text till H)
 local Title = Instance.new("TextLabel", MainFrame)
 Title.Text = "FLY & NOCLIP"; Title.Size = UDim2.new(1, 0, 0.18, 0)
 Title.BackgroundTransparency = 1; Title.TextColor3 = Color3.new(1,1,1); Title.Font = Enum.Font.GothamBold; Title.TextSize = 16
 
-local StartBtn = createBtn("Start", "FLY: OFF (F)", UDim2.new(0.05, 0, 0.2, 0), UDim2.new(0.9, 0, 0.18, 0), Color3.fromRGB(60, 60, 60), MainFrame)
+local StartBtn = createBtn("Start", "FLY: OFF (H)", UDim2.new(0.05, 0, 0.2, 0), UDim2.new(0.9, 0, 0.18, 0), Color3.fromRGB(60, 60, 60), MainFrame)
 local NoclipBtn = createBtn("Noclip", "NOCLIP: OFF (G)", UDim2.new(0.05, 0, 0.41, 0), UDim2.new(0.9, 0, 0.18, 0), Color3.fromRGB(60, 60, 60), MainFrame)
 local PlusBtn = createBtn("Plus", "+10", UDim2.new(0.05, 0, 0.62, 0), UDim2.new(0.2, 0, 0.18, 0), Color3.fromRGB(50, 100, 255), MainFrame)
 local SpeedDisp = createBtn("Disp", "Speed: 50", UDim2.new(0.3, 0, 0.62, 0), UDim2.new(0.4, 0, 0.18, 0), Color3.fromRGB(40, 40, 40), MainFrame)
@@ -111,10 +111,10 @@ end)
 local function toggleFly()
 	if flying then 
 		flying = false
-		StartBtn.Text = "FLY: OFF (F)"
+		StartBtn.Text = "FLY: OFF (H)"
 	else
 		flying = true
-		StartBtn.Text = "FLY: ON (F)"
+		StartBtn.Text = "FLY: ON (H)"
 		local char = player.Character; local root = char:WaitForChild("HumanoidRootPart")
 		local bg = Instance.new("BodyGyro", root); bg.maxTorque = Vector3.new(9e9, 9e9, 9e9); bg.P = 9e4
 		local bv = Instance.new("BodyVelocity", root); bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
@@ -138,8 +138,9 @@ end)
 PlusBtn.MouseButton1Click:Connect(function() speed = speed + 10; SpeedDisp.Text = "Speed: "..speed end)
 MinusBtn.MouseButton1Click:Connect(function() speed = math.max(10, speed - 10); SpeedDisp.Text = "Speed: "..speed end)
 
+-- Keybind Uppdaterad till H
 UserInputService.InputBegan:Connect(function(i, g) if g then return end
-	if i.KeyCode == Enum.KeyCode.F then toggleFly()
+	if i.KeyCode == Enum.KeyCode.H then toggleFly()
 	elseif i.KeyCode == Enum.KeyCode.G then noclip = not noclip; NoclipBtn.Text = noclip and "NOCLIP: ON (G)" or "NOCLIP: OFF (G)"
 	elseif i.KeyCode == Enum.KeyCode.LeftControl then toggleUI()
 	elseif i.KeyCode == Enum.KeyCode.W then ctrl.f = 1 elseif i.KeyCode == Enum.KeyCode.S then ctrl.b = -1
